@@ -1,5 +1,6 @@
 package com.cookpad.android.marketapp.api;
 
+import com.cookpad.android.marketapp.model.Category;
 import com.cookpad.android.marketapp.model.Item;
 
 import java.util.List;
@@ -20,4 +21,10 @@ public interface MarketService {
 
     @GET("items/{id}.json")
     Observable<Item> getItemById(@Path("id") int id);
+
+    @GET("categories.json")
+    Observable<List<Category>> categories();
+
+    @GET("categories/{category_id}/items.json")
+    Observable<List<Item>> categolizedItems();
 }

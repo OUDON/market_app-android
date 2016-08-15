@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MarketApp</string>
+    <string name="title_activity_category_detail">CategoryDetailActivity</string>
 </resources>
