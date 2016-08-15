@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +25,7 @@ import rx.schedulers.Schedulers;
 public class CategoryDetailActivity extends AppCompatActivity {
     private ActivityCategoryDetailBinding binding;
     public final static String EXTRA_CATEGORY_ID = "extra_category_id";
+    private final static int COLUMN_NUM = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,7 @@ public class CategoryDetailActivity extends AppCompatActivity {
         final CategoryDetailAdapter adapter = new CategoryDetailAdapter();
         binding = DataBindingUtil.setContentView(this, R.layout.activity_category_detail);
         binding.recyclerView.setAdapter(adapter);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        binding.recyclerView.setLayoutManager(new GridLayoutManager(this, COLUMN_NUM));
 
         adapter.setClickListener(new CategoryDetailAdapter.ClickListener() {
             @Override
