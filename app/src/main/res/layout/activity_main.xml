@@ -2,17 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout android:orientation="vertical"
                   android:layout_width="match_parent"
-                  android:layout_height="match_parent">
+                  android:layout_height="match_parent"
+                  android:id="@+id/fragment_container">
         <Button
             android:id="@+id/button_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="カテゴリ一覧"
             android:layout_margin="10dp"/>
-
-        <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
     </LinearLayout>
 </layout>

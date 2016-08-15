@@ -2,68 +2,23 @@ package com.cookpad.android.marketapp;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
-import android.view.View;
-
-import com.cookpad.android.marketapp.adapter.RecommendAdapter;
-import com.cookpad.android.marketapp.api.MarketServiceHolder;
 import com.cookpad.android.marketapp.databinding.ActivityMainBinding;
-import com.cookpad.android.marketapp.model.Item;
 
-import java.util.List;
-
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
-
     private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final RecommendAdapter adapter = new RecommendAdapter();
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        binding.recyclerView.setAdapter(adapter);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        adapter.setClickListener(new RecommendAdapter.ClickListener() {
-            @Override
-            public void onClickItem(Item item, View view) {
-                Intent intent = DetailActivity.createIntent(MainActivity.this, item.getId());
-                startActivity(intent);
-            }
-        });
-
-        MarketServiceHolder.get()
-                .recommendItems()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<Item>>() {
-                    @Override
-                    public void call(List<Item> items) {
-                        for (Item item : items) {
-                            adapter.add(item);
-                        }
-                    }
-                });
-
-        // RecommendAdapterに更新イベントを送る
-        adapter.notifyDataSetChanged();
-
-        // カテゴリ一覧へ遷移
-        binding.buttonCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        // transaction.replace(R.id.fragment_container, new CategoryFragment());
+        transaction.replace(R.id.fragment_container, new RecommendFragment());
+        transaction.commit();
     }
 }
