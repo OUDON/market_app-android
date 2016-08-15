@@ -32,7 +32,6 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int item_id = intent.getIntExtra(EXTRA_ITEM_ID, -1);
 
-        Log.d("MarketApp", "item_id : " + item_id);
         if (item_id != -1) {
             MarketServiceHolder.get()
                     .getItemById(item_id)
@@ -41,8 +40,7 @@ public class DetailActivity extends AppCompatActivity {
                     .subscribe(new Action1<Item>() {
                         @Override
                         public void call(Item item) {
-                            // Log.d("AppMarket", "==================");
-                            binding.itemName.setText(item.getName());
+                            setTitle(item.getName());
                             binding.itemDescription.setText(item.getDescription());
                             binding.itemPrice.setText(item.getPrice() + "円");
                             Glide.with(context).load(item.getImageUrl()).into(binding.itemThumbnail);
