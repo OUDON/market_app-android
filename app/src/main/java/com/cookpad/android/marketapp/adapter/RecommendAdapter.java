@@ -1,10 +1,12 @@
 package com.cookpad.android.marketapp.adapter;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.cookpad.android.marketapp.R;
 import com.cookpad.android.marketapp.databinding.CellRecommendBinding;
@@ -28,9 +30,19 @@ public class RecommendAdapter extends RecyclerView.Adapter< RecommendAdapter.Vie
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Item item = items.get(position);
+        final Item item = items.get(position);
         holder.binding.itemName.setText(item.getName());
         holder.binding.itemPrice.setText(item.getPrice() + "円");
+
+        Context context = holder.binding.getRoot().getContext();
+        holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onClickItem(item, view);
+                }
+            }
+        });
     }
 
     public void add(Item item){
@@ -41,6 +53,17 @@ public class RecommendAdapter extends RecyclerView.Adapter< RecommendAdapter.Vie
     public int getItemCount() {
         return items.size();
     }
+
+
+    public interface ClickListener {
+        void onClickItem(Item item, View view);
+    }
+    private ClickListener listener;
+
+    public void setClickListener(ClickListener listener) {
+        this.listener = listener;
+    }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private CellRecommendBinding binding;

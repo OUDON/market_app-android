@@ -4,6 +4,8 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+import android.widget.Toast;
 
 import com.cookpad.android.marketapp.adapter.RecommendAdapter;
 import com.cookpad.android.marketapp.databinding.ActivityMainBinding;
@@ -22,6 +24,14 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // こんな感じに書けるようにする
+        adapter.setClickListener(new RecommendAdapter.ClickListener() {
+            @Override
+            public void onClickItem(Item item, View view) {
+                Toast.makeText(MainActivity.this, "tapped", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // ダミーデータ
         adapter.add(new Item(0, "Orange", 1000));
