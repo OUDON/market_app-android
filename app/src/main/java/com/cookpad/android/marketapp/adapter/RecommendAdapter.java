@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.cookpad.android.marketapp.R;
 import com.cookpad.android.marketapp.databinding.CellRecommendBinding;
 import com.cookpad.android.marketapp.model.Item;
@@ -32,6 +33,10 @@ public class RecommendAdapter extends RecyclerView.Adapter< RecommendAdapter.Vie
         final Item item = items.get(position);
         holder.binding.itemName.setText(item.getName());
         holder.binding.itemPrice.setText(item.getPrice() + "円");
+
+        Context context = holder.binding.getRoot().getContext();
+        Glide.with(context).load(item.getImageUrl()).into(holder.binding.itemThumbnail);
+
 
         holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
