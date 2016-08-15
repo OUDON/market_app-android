@@ -7,8 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.cookpad.android.marketapp.R;
-import com.cookpad.android.marketapp.databinding.CellRecommendBinding;
+import com.cookpad.android.marketapp.databinding.CellCategoryDetailBinding;
 import com.cookpad.android.marketapp.model.Item;
 
 import java.util.ArrayList;
@@ -17,13 +18,14 @@ import java.util.List;
 /**
  * Created by takahiro-tomita on 2016/08/15.
  */
-public class RecommendAdapter extends RecyclerView.Adapter< RecommendAdapter.ViewHolder> {
+
+public class CategoryDetailAdapter extends RecyclerView.Adapter< CategoryDetailAdapter.ViewHolder> {
     private List<Item> items = new ArrayList<>();
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.cell_recommend, parent, false);
+        View view = inflater.inflate(R.layout.cell_category_detail, parent, false);
         return new ViewHolder(view);
     }
 
@@ -31,7 +33,9 @@ public class RecommendAdapter extends RecyclerView.Adapter< RecommendAdapter.Vie
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Item item = items.get(position);
         holder.binding.itemName.setText(item.getName());
-        holder.binding.itemPrice.setText(item.getPrice() + "円");
+
+        Context context = holder.binding.getRoot().getContext();
+        Glide.with(context).load(item.getImageUrl()).into(holder.binding.itemThumbnail);
 
         holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,9 +66,8 @@ public class RecommendAdapter extends RecyclerView.Adapter< RecommendAdapter.Vie
         this.listener = listener;
     }
 
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private CellRecommendBinding binding;
+        private CellCategoryDetailBinding binding;
 
         public ViewHolder(View itemView) {
             super(itemView);

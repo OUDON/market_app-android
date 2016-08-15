@@ -26,5 +26,5 @@ public interface MarketService {
     Observable<List<Category>> categories();
 
     @GET("categories/{category_id}/items.json")
-    Observable<List<Item>> categolizedItems();
+    Observable<List<Item>> categolizedItems(@Path("category_id") int category_id);
 }
