@@ -30,14 +30,14 @@ public class CategoryFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_recycler, container, false);
-        return view;
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recycler, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
         final CategoriesAdapter adapter = new CategoriesAdapter();
-        binding = DataBindingUtil.setContentView(getActivity(), R.layout.fragment_recycler);
+
         binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -52,6 +52,7 @@ public class CategoryFragment extends Fragment {
             }
         });
 
+
         MarketServiceHolder.get()
                 .categories()
                 .subscribeOn(Schedulers.io())
@@ -64,6 +65,9 @@ public class CategoryFragment extends Fragment {
                         }
                     }
                 });
+
+        // dummy data
+        // adapter.add(new Category(0, "カテゴリーテスト", "https://pbs.twimg.com/profile_images/527491408811151360/Dl4uFFtP.png", ""));
 
         // RecommendAdapterに更新イベントを送る
         adapter.notifyDataSetChanged();

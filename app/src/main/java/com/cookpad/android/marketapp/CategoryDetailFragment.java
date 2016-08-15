@@ -33,8 +33,8 @@ public class CategoryDetailFragment extends Fragment {
     //レイアウト定義をセットする
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_recycler, container, false);
-        return view;
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recycler, container, false);
+        return binding.getRoot();
     }
 
     @Override
@@ -42,7 +42,6 @@ public class CategoryDetailFragment extends Fragment {
         Log.d("CategoryDetailFragment", "=============== onViewCreated() ===============");
 
         final CategoryDetailAdapter adapter = new CategoryDetailAdapter();
-        binding = DataBindingUtil.setContentView(getActivity(), R.layout.fragment_recycler);
         binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setLayoutManager(new GridLayoutManager(getContext(), COLUMN_NUM));
 
@@ -71,6 +70,9 @@ public class CategoryDetailFragment extends Fragment {
                         }
                     });
         }
+
+        // dummy data
+        // adapter.add(new Item(0, "アイテムテスト", "説明", 1000, "https://pbs.twimg.com/profile_images/527491408811151360/Dl4uFFtP.png"));
 
         // RecommendAdapterに更新イベントを送る
         adapter.notifyDataSetChanged();
