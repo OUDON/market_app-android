@@ -35,14 +35,13 @@ public class CategoryDetailActivity extends AppCompatActivity {
         binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        /*
-        adapter.setClickListener(new RecommendAdapter.ClickListener() {
+        adapter.setClickListener(new CategoryDetailAdapter.ClickListener() {
             @Override
             public void onClickItem(Item item, View view) {
                 Intent intent = DetailActivity.createIntent(CategoryDetailActivity.this, item.getId());
                 startActivity(intent);
             }
-        });*/
+        });
 
         Intent intent = getIntent();
         final int category_id = intent.getIntExtra(EXTRA_CATEGORY_ID, -1);
@@ -54,7 +53,6 @@ public class CategoryDetailActivity extends AppCompatActivity {
                     .subscribe(new Action1<List<Item>>() {
                         @Override
                         public void call(List<Item> items) {
-                            Log.d("MarketApp", String.valueOf(items.size()));
                             for (Item item : items) {
                                 adapter.add(item);
                             }
