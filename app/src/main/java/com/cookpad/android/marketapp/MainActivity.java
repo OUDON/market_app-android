@@ -7,12 +7,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.cookpad.android.marketapp.adapter.RecommendAdapter;
 import com.cookpad.android.marketapp.api.MarketServiceHolder;
 import com.cookpad.android.marketapp.databinding.ActivityMainBinding;
-import com.cookpad.android.marketapp.databinding.CellRecommendBinding;
 import com.cookpad.android.marketapp.model.Item;
 
 import java.util.List;
@@ -49,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(new Action1<List<Item>>() {
                     @Override
                     public void call(List<Item> items) {
-                        Log.d("MarketApp", String.valueOf(items.size()));
                         for (Item item : items) {
                             adapter.add(item);
                         }
@@ -58,5 +55,15 @@ public class MainActivity extends AppCompatActivity {
 
         // RecommendAdapterに更新イベントを送る
         adapter.notifyDataSetChanged();
+
+        // カテゴリ一覧へ遷移
+        binding.buttonCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
