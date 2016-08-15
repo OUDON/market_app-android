@@ -52,10 +52,8 @@ public class RecommendFragment extends Fragment {
         adapter.setClickListener(new RecommendAdapter.ClickListener() {
             @Override
             public void onClickItem(Item item, View view) {
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, CategoryDetailFragment.newInstance(item.getId()));
-                transaction.addToBackStack(null);
-                transaction.commit();
+                Intent intent = DetailActivity.createIntent(getActivity(), item.getId());
+                startActivity(intent);
             }
         });
 

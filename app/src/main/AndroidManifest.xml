@@ -19,11 +19,6 @@
         <activity
             android:name=".DetailActivity"
             android:label="@string/app_name" />
-        <activity android:name=".CategoryActivity">
-
-        </activity>
-        <activity
-            android:name=".CategoryDetailActivity"/>
     </application>
 
 </manifest>

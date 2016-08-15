@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import com.cookpad.android.marketapp.adapter.CategoryDetailAdapter;
 import com.cookpad.android.marketapp.api.MarketServiceHolder;
-import com.cookpad.android.marketapp.databinding.ActivityCategoryDetailBinding;
 import com.cookpad.android.marketapp.databinding.FragmentRecyclerBinding;
 import com.cookpad.android.marketapp.model.Item;
 

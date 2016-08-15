@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,6 @@ import android.view.ViewGroup;
 
 import com.cookpad.android.marketapp.adapter.CategoriesAdapter;
 import com.cookpad.android.marketapp.api.MarketServiceHolder;
-import com.cookpad.android.marketapp.databinding.ActivityCategoryBinding;
 import com.cookpad.android.marketapp.databinding.FragmentRecyclerBinding;
 import com.cookpad.android.marketapp.model.Category;
 
@@ -45,8 +45,10 @@ public class CategoryFragment extends Fragment {
         adapter.setClickListener(new CategoriesAdapter.ClickListener() {
             @Override
             public void onClickItem(Category category, View view) {
-                Intent intent = CategoryDetailActivity.createIntent(getActivity(), category.getId());
-                startActivity(intent);
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_container, CategoryDetailFragment.newInstance(category.getId()));
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 

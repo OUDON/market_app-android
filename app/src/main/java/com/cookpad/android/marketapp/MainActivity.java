@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        // transaction.replace(R.id.fragment_container, new CategoryFragment());
         transaction.replace(R.id.fragment_container, new RecommendFragment());
         transaction.commit();
     }
