@@ -23,9 +23,18 @@ public class CartItem {
     @Column
     public int price;
 
-    @Column(value = "0")
+    @Column
     public int count;
 
     public CartItem() {
+    }
+
+    public static CartItem createCartItem(Item item, int quanity) {
+        CartItem res = new CartItem();
+        res.itemId = item.getId();
+        res.name = item.getName();
+        res.price = item.getPrice();
+        res.count = quanity;
+        return res;
     }
 }
