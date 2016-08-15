@@ -3,12 +3,22 @@
     <LinearLayout android:orientation="vertical"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
-                  android:id="@+id/fragment_container">
-        <Button
-            android:id="@+id/button_category"
+                  >
+
+        <android.support.v4.view.ViewPager
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="カテゴリ一覧"
-            android:layout_margin="10dp"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/fragment_container">
+
+            <android.support.v4.view.PagerTitleStrip
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:textColor="#000000"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+        </android.support.v4.view.ViewPager>
+
     </LinearLayout>
 </layout>
