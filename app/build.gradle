@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 24
@@ -21,6 +22,10 @@ android {
     dataBinding {
         enabled = true
     }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+     }
 }
 
 buildscript {
@@ -36,4 +41,16 @@ dependencies {
     compile "com.android.support:support-v4:$supportLibraryVersion"
 
     compile "com.android.support:recyclerview-v7:$supportLibraryVersion"
+
+    // for api
+    compile 'io.reactivex:rxjava:1.1.7'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    // for db
+    apt 'com.github.gfx.android.orma:orma-processor:2.5.2'
+    compile 'com.github.gfx.android.orma:orma:2.5.2'
 }

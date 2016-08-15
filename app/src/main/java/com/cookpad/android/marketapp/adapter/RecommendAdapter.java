@@ -34,7 +34,6 @@ public class RecommendAdapter extends RecyclerView.Adapter< RecommendAdapter.Vie
         holder.binding.itemName.setText(item.getName());
         holder.binding.itemPrice.setText(item.getPrice() + "円");
 
-        Context context = holder.binding.getRoot().getContext();
         holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
