@@ -67,15 +67,10 @@ public class CategoryDetailFragment extends Fragment {
                             for (Item item : items) {
                                 adapter.add(item);
                             }
+                            adapter.notifyDataSetChanged();
                         }
                     });
         }
-
-        // dummy data
-        // adapter.add(new Item(0, "アイテムテスト", "説明", 1000, "https://pbs.twimg.com/profile_images/527491408811151360/Dl4uFFtP.png"));
-
-        // RecommendAdapterに更新イベントを送る
-        adapter.notifyDataSetChanged();
     }
 
     public static CategoryDetailFragment newInstance(int categoryId) {

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,6 @@ public class CategoryFragment extends Fragment {
             }
         });
 
-
         MarketServiceHolder.get()
                 .categories()
                 .subscribeOn(Schedulers.io())
@@ -60,16 +60,12 @@ public class CategoryFragment extends Fragment {
                 .subscribe(new Action1<List<Category>>() {
                     @Override
                     public void call(List<Category> categories) {
+                        Log.d("CategoryFragment", "GET");
                         for (Category category : categories) {
                             adapter.add(category);
                         }
+                        adapter.notifyDataSetChanged();
                     }
                 });
-
-        // dummy data
-        // adapter.add(new Category(0, "カテゴリーテスト", "https://pbs.twimg.com/profile_images/527491408811151360/Dl4uFFtP.png", ""));
-
-        // RecommendAdapterに更新イベントを送る
-        adapter.notifyDataSetChanged();
     }
 }

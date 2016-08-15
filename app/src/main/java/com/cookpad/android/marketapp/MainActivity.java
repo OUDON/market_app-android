@@ -29,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Navigation Drawer
         String[] drawer_strs = {"おすすめ", "カテゴリー", "カートを表示"};
-        binding.leftDrawer.setAdapter((new ArrayAdapter<String>(this,
+         binding.leftDrawer.setAdapter((new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, drawer_strs)));
-        binding.leftDrawer.setOnItemClickListener(new DrawerItemClickListener());
+         binding.leftDrawer.setOnItemClickListener(new DrawerItemClickListener());
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
