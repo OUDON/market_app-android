@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 transaction.replace(R.id.fragment_container, new CategoryFragment());
                 break;
             case 2:
-                // Show Cart (not implemented yet)
+                transaction.replace(R.id.fragment_container, new CartFragment());
                 break;
         }
         transaction.commit();
